@@ -1,25 +1,57 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {Component} from "react";
+import Tasks from './Tasks'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: '',
+            tasks: [
+                {id: 1, text: "Arttu on vitun idiootti"}
+            ]
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        const tasks = this.state.tasks
+        const task = {id: this.state.tasks.length + 1, text: this.state.value}
+        tasks.push(task)
+        this.setState({tasks})
+
+        // Aikaisemmat ongelmat johtuivat tämän puutteesta. Tämä estää sivustoa refreshautumasta.
+        // Ilmeisesti kyseinen asia tapahtuu aina submitin yhteydessä ilman tätä.
+        // Eli muista pitää mukana näiden kanssa.
+        // Refraushauksen puute tosin aiheuttaa sen, että kirjoitettu teksti ei katoa submit laatikosta.
+        // Pidemmällä tähtäimellä meidän siis pitäisi pystyä tallentamaan input data, mutta en kyllä syvenny siihen aivan heti
+        event.preventDefault();
+    }
+
+    render(){
+        return (
+            <div className="Task List by Arttu Paldán">
+                <main className='Container'>
+                    <Tasks
+                        tasks = {this.state.tasks}
+                    />
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Task:
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </main>
+            </div>
+        );
+    }
 }
 
 export default App;
