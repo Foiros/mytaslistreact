@@ -3,7 +3,7 @@ import TaskText from "./TaskText";
 
 class Tasks extends Component{
     render() {
-        const {tasks, onDelete, onComplete} = this.props
+        const {tasks, onDelete} = this.props
         return(
             <div>
                 {tasks.map(task => (

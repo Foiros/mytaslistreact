@@ -20,7 +20,9 @@ class TaskText extends Component{
         const {task, text, onDelete} = this.props
 
         return(<div>
-            <h1>{task.id + ". " + text}</h1>
+            <h2>
+                {task.id + ". " + text}
+            </h2>
             <button
                 onClick={() => onDelete(task.id)}
                 className="btn btn-danger btn-sm m-2">

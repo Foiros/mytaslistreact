@@ -2,6 +2,12 @@ import './App.css';
 import React, {Component} from "react";
 import Tasks from './Tasks'
 
+// What else do I want to add to this program?
+// 1. Way to calculate the percentage of completed tasks
+// 1.1. In order to do this, we need way to count completed tasks
+// 2. Probably should comment the code, despite it being my personal project
+// 3. Way to save the tasks or rather the whole list and get it on the screen
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -13,6 +19,7 @@ class App extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDeleteTask = this.handleDeleteTask.bind(this)
     }
 
     handleChange(event) {
@@ -40,16 +47,18 @@ class App extends Component {
 
     render(){
         return (
-            <div className="Task List by Arttu Paldán">
+            <div
+                className="Task List by Arttu Paldán">
                 <main className='Container'>
-                    <label>
-                        {this.state.date}
-                    </label>
+                    <h1>
+                        Tasks on {this.state.date}
+                    </h1>
                     <Tasks
                         tasks = {this.state.tasks}
                         onDelete = {this.handleDeleteTask}
                     />
-                    <form onSubmit={this.handleSubmit}>
+                    <form
+                        onSubmit={this.handleSubmit}>
                         <label>
                             Task:
                             <input
