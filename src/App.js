@@ -7,8 +7,8 @@ class App extends Component {
         super(props);
         this.state = {
             value: "",
-            tasks: [{ id: 1, text: "Vitun paskaaa...", completed: false}],
-            completedTasks: 0
+            tasks: [],
+            date: new Date().toLocaleString()
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -38,40 +38,28 @@ class App extends Component {
         this.setState({tasks})
     }
 
-    handleCompleteTask = (completed) => {
-        if(completed){
-            const completedTasks = this.state.completedTasks + 1
-            this.setState({completedTasks})
-            console.log(completedTasks)
-
-            const taskCompleted = true
-            this.setState({completed: taskCompleted})
-        }
-        else{
-            const completedTasks = this.state.completedTasks - 1
-            this.setState({completedTasks})
-            console.log(completedTasks)
-
-            const taskCompleted = false
-            this.setState({completed: taskCompleted})
-        }
-    }
-
     render(){
         return (
             <div className="Task List by Arttu Paldán">
                 <main className='Container'>
+                    <label>
+                        {this.state.date}
+                    </label>
                     <Tasks
                         tasks = {this.state.tasks}
                         onDelete = {this.handleDeleteTask}
-                        onComplete = {this.handleCompleteTask}
                     />
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Task:
-                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <input
+                                type="text"
+                                value={this.state.value}
+                                onChange={this.handleChange} />
                         </label>
-                        <input type="submit" value="Submit" />
+                        <input
+                            type="submit"
+                            value="Submit" />
                     </form>
                 </main>
             </div>

@@ -10,9 +10,7 @@ class Tasks extends Component{
                     <TaskText
                             key={task.id}
                             text={task.text}
-                            completed={task.completed}
                             onDelete={onDelete}
-                            onComplete={onComplete}
                             task={task}
                         />
                     ))}
